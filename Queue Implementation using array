@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+
+const int Size = 100;
+
+int arr[Size];
+int front = -1;
+int rear = -1;
+
+void enqueue(int value) {
+    if (rear == Size - 1) {
+        cout << "Queue is full" << endl;
+    }
+    else {
+        if (front == -1)
+            front = 0;
+
+        rear++;
+        arr[rear] = value;
+    }
+}
+
+void dequeue() {
+    if (front == -1 || front > rear) {
+        cout << "Queue is empty" << endl;
+    }
+    else {
+        cout << "Deleted element: " << arr[front] << endl;
+        front++;
+
+        if (front > rear) {
+            front = -1;
+            rear = -1;
+        }
+    }
+}
+
+void display() {
+    if (front == -1) {
+        cout << "Queue is empty" << endl;
+    }
+    else {
+        for (int i = front; i <= rear; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int choice;
+    int value;
+
+    cout << "1. Enqueue" << endl;
+    cout << "2. Dequeue" << endl;
+    cout << "3. Display" << endl;
+    cout << "4. Exit" << endl;
+
+    while (true) {
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            cout << "Enter value: ";
+            cin >> value;
+            enqueue(value);
+        }
+        else if (choice == 2) {
+            dequeue();
+        }
+        else if (choice == 3) {
+            display();
+        }
+        else if (choice == 4) {
+            break;
+        }
+        else {
+            cout << "Invalid choice" << endl;
+        }
+    }
+
+    return 0;
+}
